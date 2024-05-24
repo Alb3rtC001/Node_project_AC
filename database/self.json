@@ -1,15 +1,28 @@
 {
-    "id": "0001",
-    "goals": {
-        "id": {
-            "name": "",
-            "type": "",
-            "description": "",
-            "deadline": "",
-            "schedule": ""
+    "0001": {
+        "goals": {
+            "goalId":{
+                "name": "",
+                "type": "General",
+                "description": "",
+                "deadline": "",
+                "schedule": "",
+                "checked": true,
+                "startDate": "",
+                "lastUpdate": "",
+                "countUpdates": 0,
+                "status": "in-progress",
+                "progress": [
+                    {
+                        "date": "",
+                        "status" : ""
+                    }
+                ]
             }
-    }, 
-    "page": 1,
-    "totalGoals": 1
-
+        }, 
+        "creationDate": "25-05-2024 00:00:00",
+        "totalGoalsCreated": 0,
+        "totalGoalsComplited": 0,
+        "author": "id"
+    }
 }

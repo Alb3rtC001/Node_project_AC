@@ -3,5 +3,6 @@
     "name": "Albert",
     "pwd": "",
     "role": "",
-    "hash" : ""
+    "hash" : "",
+    "goalsId": 1
 }
