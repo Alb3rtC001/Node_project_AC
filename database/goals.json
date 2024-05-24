@@ -1,0 +1,36 @@
+{
+    "General":{
+        "name": "String",
+        "description": "String",
+        "deadline": "Date",
+        "schedule": "Array - Date",
+        "startDate": "Date",
+        "lastUpdate": "Date",
+        "countUpdates": "Int",
+        "status": "Bolean",
+        "progress": [
+            {
+                "date": "Date",
+                "notes": "String",
+                "status": "Bolean"
+            }
+        ]
+    },
+    "Study": {
+
+    },
+    "Sport":{
+
+    },
+    "Recordatory":{
+        "name": "String",
+        "description": "String",
+        "deadline": "Date",
+        "startDate": "Date",
+        "lastUpdate": "Date",
+        "status": "Bolean"
+    },
+    "List":{
+
+    }
+}
