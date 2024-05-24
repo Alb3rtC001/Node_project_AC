@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Emulation</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: monospace;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        #terminal {
+            width: 80%;
+            height: 80%;
+            border: 1px solid #333;
+            padding: 10px;
+            overflow-y: auto;
+        }
+        #input {
+            width: 80%;
+            background-color: black;
+            color: white;
+            border: none;
+            outline: none;
+            font-family: monospace;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="terminal"></div>
+    <input id="input" autofocus />
+    <script>
+        const terminal = document.getElementById('terminal');
+        const input = document.getElementById('input');
+
+        input.addEventListener('keydown', async (event) => {
+            if (event.key === 'Enter') {
+                const command = input.value;
+                input.value = '';
+                terminal.innerHTML += `<div> > ${command}</div>`;
+                
+                const response = await fetch('/execute', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ command })
+                });
+                
+                const data = await response.json();
+                terminal.innerHTML += `<div>${data.response}</div>`;
+                terminal.scrollTop = terminal.scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html>
