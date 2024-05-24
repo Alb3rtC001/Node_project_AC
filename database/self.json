@@ -1,0 +1,15 @@
+{
+    "id": "0001",
+    "goals": {
+        "id": {
+            "name": "",
+            "type": "",
+            "description": "",
+            "deadline": "",
+            "schedule": ""
+            }
+    }, 
+    "page": 1,
+    "totalGoals": 1
+
+}
