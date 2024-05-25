@@ -3,7 +3,25 @@
         "name": "String",
         "description": "String",
         "deadline": "Date",
-        "schedule": "Array - Date",
+        "schedule": {
+            "horas" : null,
+            "day": null,
+            "week": [0,0,0,0,0,0,0],
+            "month": {
+                "En": 0,
+                "Fb": 0,
+                "Mr": 0,
+                "Ab": 0,
+                "My": 0,
+                "Jn": 0,
+                "Jl": 0,
+                "Ag": 0,
+                "St": 0,
+                "Oc": 0,
+                "Nb": 0,
+                "Dc": 0
+            }
+        },
         "startDate": "Date",
         "lastUpdate": "Date",
         "countUpdates": "Int",

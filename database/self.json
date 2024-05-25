@@ -1,28 +1,45 @@
 {
-    "0001": {
+    "1716588000": {
         "goals": {
-            "goalId":{
-                "name": "",
+            "0":{
+                "name": "Test",
                 "type": "General",
-                "description": "",
-                "deadline": "",
-                "schedule": "",
-                "checked": true,
-                "startDate": "",
-                "lastUpdate": "",
+                "description": "New check test",
+                "deadline": "2025/01/01 00:00:00",
+                "schedule": {
+                    "horas" : null,
+                    "day": null,
+                    "week": [0,0,0,0,0,0,0],
+                    "month": {
+                        "En": 0,
+                        "Fb": 0,
+                        "Mr": 0,
+                        "Ab": 0,
+                        "My": 0,
+                        "Jn": 0,
+                        "Jl": 0,
+                        "Ag": 0,
+                        "St": 0,
+                        "Oc": 0,
+                        "Nb": 0,
+                        "Dc": 0
+                    }
+                },
+                "startDate": "25/5/2024, 12:25:05",
+                "lastUpdate": "25/5/2024, 12:25:05",
                 "countUpdates": 0,
-                "status": "in-progress",
+                "status": false,
                 "progress": [
                     {
-                        "date": "",
-                        "status" : ""
+                        "date": "25/5/2024, 12:25:05",
+                        "notes": "Testing",
+                        "status": false
                     }
                 ]
             }
         }, 
-        "creationDate": "25-05-2024 00:00:00",
         "totalGoalsCreated": 0,
         "totalGoalsComplited": 0,
-        "author": "id"
+        "author": "0001"
     }
 }
