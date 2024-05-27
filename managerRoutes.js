@@ -3,15 +3,25 @@ const path = require('path');
 
 const loadRoutes = (app) => {
     const routesPath = path.join(__dirname, 'routes');
-    
+    const routes = {};
+
     fs.readdirSync(routesPath).forEach(file => {
-        if (file.endsWith('Routes.js')) {
-            const route = require(path.join(routesPath, file));
-            const routePath = `/api/${file.replace('Routes.js', '')}`;
-            app.use(routePath, route);
-            console.log(`Route loaded: ${routePath}`);
-        }
+        const routePath = path.join(routesPath, file);
+        const route = require(routePath);
+        const routeName = file.split('.')[0]; // Usa el nombre del archivo como nombre de ruta
+        app.use(`/api/${routeName}`, route);
+
+        // Añadir las funciones de las rutas al objeto routes
+        route.stack.forEach(layer => {
+            if (layer.route && layer.route.path) {
+                const method = Object.keys(layer.route.methods)[0];
+                const key = `${routeName}.${method}.${layer.route.path.replace('/', '')}`;
+                routes[key] = layer.route.stack[0].handle;
+            }
+        });
     });
+
+    return routes;
 };
 
 module.exports = loadRoutes;
