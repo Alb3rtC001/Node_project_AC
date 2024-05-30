@@ -1,9 +1,9 @@
 const express = require('express');
 const YearGoals = require('../models/Goal');
 const router = express.Router();
-
+/*
 // Ruta para obtener todas las metas de un año
-router.get('/:year', async (req, res) => {
+router.get('-c/:year', async (req, res) => {
     try {
         const year = req.params.year;
         const yearGoals = await YearGoals.findById(year);
@@ -17,7 +17,7 @@ router.get('/:year', async (req, res) => {
 });
 
 // Ruta para agregar una nueva meta a un año específico
-router.post('/:year', async (req, res) => {
+router.post('-c/:year', async (req, res) => {
     try {
         const year = req.params.year;
         const goalId = `goal${Date.now()}`; // Genera un ID único basado en la fecha actual
@@ -43,12 +43,12 @@ router.post('/:year', async (req, res) => {
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
-});
+});*/
 
 // Comando específico para objetivos
-router.get('/command/:action', async (req, res) => {
+router.get('/-c/:action', async (req, res) => {
     const action = req.params.action;
-
+    console.log("Entra en la acción que le toca con ", req.params);
     switch (action) {
         case 'summary':
             // Implementar la lógica para el comando "summary"

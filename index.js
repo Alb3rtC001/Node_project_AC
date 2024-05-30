@@ -32,19 +32,25 @@ app.get('/home', function(request, response) {
     response.sendFile(__dirname + '/public/view/main_view.html');
 });
 
-app.post('/execute', async (req, res) => {  // Cambiar la función a async
-    const command = req.body.command;
-    let response;
-
-    if (routes[command]) {
-        try {
-            response = await routes[command](req, res); // Pasa req y res a la función
-        } catch (error) {
-            response = `Error executing command: ${error.message}`;
+app.post('/execute', async (req, res) => { 
+    try{
+        const command = req.body.command;
+        let response;
+        //TODO: Error no entre en el else se queda pending
+        if (routes[command.split(":")[0]]) {
+            try {
+                response = await routes[command.split(":")[0]](req, res); 
+                res.json({ "response": command.split(":")[1] });
+            } catch (error) {
+                response = `Error executing command: ${error.message}`;
+            }
+        } else if(command == "--help"){
+            console.log("->", routes);
+            //Hacer aqui el help y poner las routas de comandos
+        } else {
+            response = `Unknown command: ${command}`;
         }
-    } else {
-        response = `Unknown command: ${command}`;
+    }catch(error){
+        console.log("Error in execute: ", error);
     }
-
-    res.json({ response });
 });

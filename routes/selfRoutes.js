@@ -3,17 +3,17 @@ const Self = require('../models/Self');
 const router = express.Router();
 
 // Ruta para obtener todos los nombres en la colección "self"
-router.get('/', async (req, res) => {
+router.get('/-s', async (req, res) => {
     try {
         const names = await Self.find({}); // Solo selecciona el campo "name"
-        res.json(names);
+        res.send(names);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
 
 // Ruta para agregar un nuevo documento en la colección "self"
-router.post('/', async (req, res) => {
+router.post('/-s', async (req, res) => {
     const self = new Self({
         name: req.body.name
     });
