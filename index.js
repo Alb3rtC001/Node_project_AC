@@ -34,19 +34,22 @@ app.get('/home', function(request, response) {
 
 app.post('/execute', async (req, res) => { 
     try{
-        const command = req.body.command;
+        var command = req.body.command;
         let response;
+        if(command.indexOf("-") != -1){
+            req.params.action = command.substring(command.indexOf("-")+3, command.length);
+            command = command.substring(0, command.indexOf("-")+3);
+        }
         //TODO: Error no entre en el else se queda pending
-        if (routes[command.split(":")[0]]) {
+        if (routes[command]) {
             try {
-                response = await routes[command.split(":")[0]](req, res); 
-                res.json({ "response": command.split(":")[1] });
+                response = await routes[command](req, res); 
             } catch (error) {
                 response = `Error executing command: ${error.message}`;
             }
-        } else if(command == "--help"){
+        } else if(command == "--h"){
+            //TODO: Hacer aqui el help y poner las routas de comandos
             console.log("->", routes);
-            //Hacer aqui el help y poner las routas de comandos
         } else {
             response = `Unknown command: ${command}`;
         }

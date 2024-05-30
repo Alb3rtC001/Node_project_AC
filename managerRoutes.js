@@ -15,18 +15,14 @@ const loadRoutes = (app) => {
         route.stack.forEach(layer => {
             if (layer.route && layer.route.path) {
                 var method = Object.keys(layer.route.methods)[0];
-                /*switch(method){
-                    case "get":
-                        method = "g";
-                        break;
-                    case "post":
-                        method = "p";
-                        break;
-                    default:
+                /*var cell_res = layer.route.path.replace('/', '').replace('/', '').split(":")[1];
+                if(cell_res != undefined){
+                    console.log(layer.route.path.replace('/', ''));
                 }*/
-                //------ console.log(layer.route.path.replace('/', '').replace('/', '').split(":")[1]);
                 //Aqui poner la ruta que esta en la url y ahcer un slice para luego hace run post
-                const key = `${method} -${routeName}` + (layer.route.path.replace('/', '') != "" ? ` ${layer.route.path.replace('/', '').replace('/', '').split(":")[0]}` : '');
+                const key = `${method} ${routeName}` + (layer.route.path.replace('/', '') != "" ? ` ${layer.route.path.replace('/', '').replace('/', '').split(":")[0]}` : '');
+                layer.route.stack[0].params = layer.route.path.replace('/', '').replace('/', '').split(":")[1];
+                console.log(layer.route.stack[0]);
                 routes[key] = layer.route.stack[0].handle;
             }
         });

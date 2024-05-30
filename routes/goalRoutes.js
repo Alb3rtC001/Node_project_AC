@@ -48,7 +48,7 @@ router.post('-c/:year', async (req, res) => {
 // Comando específico para objetivos
 router.get('/-c/:action', async (req, res) => {
     const action = req.params.action;
-    console.log("Entra en la acción que le toca con ", req.params);
+    console.log("Entra en la acción que le toca con ", action);
     switch (action) {
         case 'summary':
             // Implementar la lógica para el comando "summary"
