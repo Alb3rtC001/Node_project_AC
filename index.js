@@ -36,9 +36,11 @@ app.post('/execute', async (req, res) => {
     try{
         var command = req.body.command;
         let response;
+        console.log("->" ,command.substring(0, command.indexOf("-")+2));
         if(command.indexOf("-") != -1){
             req.params.action = command.substring(command.indexOf("-")+3, command.length);
-            command = command.substring(0, command.indexOf("-")+3);
+            //TODO: cambiar a +3 para summary y +2 para -h y -cls
+            command = command.substring(0, command.indexOf("-")+2);
         }
         //TODO: Error no entre en el else se queda pending
         if (routes[command]) {
@@ -47,10 +49,14 @@ app.post('/execute', async (req, res) => {
             } catch (error) {
                 response = `Error executing command: ${error.message}`;
             }
-        } else if(command == "--h"){
+        } else if(command == "-h"){
             //TODO: Hacer aqui el help y poner las routas de comandos
             console.log("->", routes);
+        }else if(command == "-cl"){
+            //TODO: Hacer aqui el help y poner las routas de comandos
+            console.clear();
         } else {
+            //TODO: crear un get para imprimir por consola
             response = `Unknown command: ${command}`;
         }
     }catch(error){
