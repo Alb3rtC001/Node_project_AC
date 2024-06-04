@@ -3,3 +3,7 @@ Add new files in git ignore:
 >> git add .
 >> git commit -m ".gitignore is now working"
 
+---------------------
+Mi carpeta Routes es mi controlador
+---------------------
+
