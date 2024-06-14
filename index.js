@@ -3,6 +3,7 @@ const connectToMongo = require('./config/mongodb');
 const loadRoutes = require('./managerRoutes');
 const logger = require('./config/wingston');
 const bodyParser = require('body-parser'); // Asegurarse de que este middleware está en uso
+const path = require('path');
 
 require('dotenv').config();
 
@@ -14,6 +15,7 @@ const url = `${process.env.TERMINAL_URL}${PORT}/home`;
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
@@ -29,8 +31,8 @@ app.listen(PORT, () => {
     });*/
 });
 
-app.get('/home', function(request, response) {
-    response.sendFile(__dirname + '/public/view/main_view.html');
+app.get('/home', function(req, res) {
+    res.sendFile(path.join(__dirname, 'public', 'view', 'main_view.html'));
 });
 
 app.post('/execute', async (req, res) => { 

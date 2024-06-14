@@ -4,90 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Command Terminal</title>
-    <style>
-        body {
-            font-family: monospace;
-            background-color: #000;
-            color: #0f0;
-            overflow-y: hidden;
-            margin: 2vh;
-        }
-        #terminal {
-            width: 99%;
-            height: 90vh;
-            overflow-y: auto;
-            padding: 10px;
-            border-top: 1px solid green;
-            border-left: 1px solid green;
-            border-right: 1px solid green;
-            border-radius: 10px;
-        }
-        #commandInput {
-            width: 99%;
-            height: 20px;
-            background-color: #000;
-            color: #0f0;
-            border: 1px solid grey;
-            border-radius: 30px;
-            outline: none;
-            padding-left: 15px;
-            padding-bottom: 5px;
-            padding-top: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="..\css\main_view.css">
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <script src="../js/main_view.js"></script>
 </head>
 <body>
     <div id="terminal"></div>
     <input type="text" id="commandInput" autofocus>
-
-    <script>
-        const terminal = document.getElementById('terminal');
-        const commandInput = document.getElementById('commandInput');
-
-        commandInput.addEventListener('keydown', async (event) => {
-            if (event.key === 'Enter') {
-                const command = commandInput.value;
-                commandInput.value = '';
-                terminal.innerHTML += `<div>$ ${command}</div>`;
-
-                try{
-                    fetch("/execute", {      
-                        method: "POST",
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify({command})
-                    }).then((response) => {
-                        console.log(response);
-                        return response.json()
-                    }).then((result) => {
-                        var str = JSON.stringify(result);
-                        console.log(str);
-                        terminal.innerHTML += validationType(str);
-                    }).error((error) =>{
-                        console.log("Front error ", error);
-                    });
-                }catch(error){
-
-                }
-
-                terminal.scrollTop = terminal.scrollHeight;
-            }
-        });
-
-        function validationType(response){
-            //console.log(response.split(","));
-            if(response[0] == "["){
-                let str_array = "";
-                let array = response.replace("[","").replace("]","");
-                array = array.split(",");
-                console.log(array);
-                for(res in array){
-                    str_array += `<div>${array[res]}</div>`;
-                }
-                return str_array;
-            }else{
-                return `<div>${response}</div>`;
-            }
-        }
-    </script>
 </body>
 </html>

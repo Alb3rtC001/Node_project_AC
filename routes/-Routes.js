@@ -6,13 +6,10 @@ router.get('/:action', async (req, res) => {
     console.log("Entra en la acción que le toca con ", action);
     switch (action) {
         case 'h':
-            console.log("Las rutas son: ", JSON.stringify(global.ROUTES));
-            //TODO: Añadir un print para verse mejor
-            res.json(global.ROUTES);
+            res.json(global.ROUTES); //imprime todos los comandos || es el --help
             break;
         case 'cl':
-            // Implementar la lógica para el comando "summary"
-            console.clear()
+            console.clear() //Clear console node
             break;
         default:
             res.status(400).json({ message: 'Comando no reconocido' });

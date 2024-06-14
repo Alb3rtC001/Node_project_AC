@@ -8,7 +8,6 @@ Mi carpeta Routes es mi controlador
 ---------------------
 
 * Puntos a conseguir:
-- Acabar de poner las rutas de get -
 - Promesa para rutas erroneas (Implementar middleware)
 - Crear un archivo para control de Errores
 - Añadir funcionalidad de arrow up, copiar el último msg en front
