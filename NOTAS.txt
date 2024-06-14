@@ -17,3 +17,5 @@ Mi carpeta Routes es mi controlador
 - Create setter y getters para las clases
 - Acabar las funciones especializadas para cada clase según su archivo
 - Implementar mathplotlib para las graph de Python en el front
+*************
+- Mirar que funcione sin base de datos para el apartado sin conexión (Y volcar todas las llamadas e inputs una vez haya conex)

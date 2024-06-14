@@ -4,6 +4,7 @@ const path = require('path');
 const loadRoutes = (app) => {
     const routesPath = path.join(__dirname, 'routes');
     const routes = {};
+    const all_routes = [];
 
     fs.readdirSync(routesPath).forEach(file => {
         const routePath = path.join(routesPath, file);
@@ -16,13 +17,15 @@ const loadRoutes = (app) => {
                 var method = Object.keys(layer.route.methods)[0];
                 //Aqui compone el comando por tipo de metodo, nombre de la clase y acción si fuera necesario
                 var key = `${method} ${routeName}` + (layer.route.path.replace('/', '') != "" ? ` ${layer.route.path.replace('/', '').replace('/', '').split(":")[0]}` : '');
+                //TODO: añadir su fuera necesario los command que necesitan mas de un valor mas
+                all_routes.push(key);
                 key = key.charAt(key.length-1) == " "? key.slice(0, -1) : key; 
                 layer.route.stack[0].params = layer.route.path.replace('/', '').replace('/', '').split(":")[1];1
                 routes[key] = layer.route.stack[0].handle;
             }
         });
     });
-
+    global.ROUTES = all_routes;
     return routes;
 };
 
