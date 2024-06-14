@@ -14,8 +14,9 @@ const loadRoutes = (app) => {
         route.stack.forEach(layer => {
             if (layer.route && layer.route.path) {
                 var method = Object.keys(layer.route.methods)[0];
-                //Aqui poner la ruta que esta en la url y ahcer un slice para luego hace run post
-                const key = `${method} ${routeName}` + (layer.route.path.replace('/', '') != "" ? ` ${layer.route.path.replace('/', '').replace('/', '').split(":")[0]}` : '');
+                //Aqui compone el comando por tipo de metodo, nombre de la clase y acción si fuera necesario
+                var key = `${method} ${routeName}` + (layer.route.path.replace('/', '') != "" ? ` ${layer.route.path.replace('/', '').replace('/', '').split(":")[0]}` : '');
+                key = key.charAt(key.length-1) == " "? key.slice(0, -1) : key; 
                 layer.route.stack[0].params = layer.route.path.replace('/', '').replace('/', '').split(":")[1];1
                 routes[key] = layer.route.stack[0].handle;
             }

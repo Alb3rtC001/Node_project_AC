@@ -7,3 +7,13 @@ Add new files in git ignore:
 Mi carpeta Routes es mi controlador
 ---------------------
 
+* Puntos a conseguir:
+- Acabar de poner las rutas de get -
+- Promesa para rutas erroneas (Implementar middleware)
+- Crear un archivo para control de Errores
+- Añadir funcionalidad de arrow up, copiar el último msg en front
+- Añadir una función de print (hacer mas bonito los dato que se printan en el front / mejro estructurados)
+- Acabar de estructurar la BD
+- Create setter y getters para las clases
+- Acabar las funciones especializadas para cada clase según su archivo
+- Implementar mathplotlib para las graph de Python en el front
