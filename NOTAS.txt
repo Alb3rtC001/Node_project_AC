@@ -10,7 +10,6 @@ Mi carpeta Routes es mi controlador
 * Puntos a conseguir:
 - Promesa para rutas erroneas (Implementar middleware)
 - Crear un archivo para control de Errores
-- Añadir funcionalidad de arrow up, copiar el último msg en front
 - Añadir una función de print (hacer mas bonito los dato que se printan en el front / mejro estructurados)
 - Acabar de estructurar la BD
 - Create setter y getters para las clases

@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
 
 router.get('/-help', async (req, res) => {
     try {
-        //TODO: mejorar
+        //TODO: eliminar /cambiar
         res.send([
             '---------------------------------------',
             'Las rutas conocidas son las siguientes:',

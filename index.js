@@ -39,9 +39,8 @@ app.post('/execute', async (req, res) => {
     try{
         var command = req.body.command;
         let response;
-        console.log("->" ,command);//.substring(0, command.indexOf("-")+2));
-        //Si contiene - entra
-        if(command.indexOf("-") != -1){
+        
+        if(command.indexOf("-") != -1){ //Si contiene - entra
             if(command.length - command.indexOf("-") <= 3){
                 req.params.action = command.substring(command.indexOf("-")+1, command.length);
                 command = command.substring(0, command.indexOf("-")+1);
@@ -50,7 +49,7 @@ app.post('/execute', async (req, res) => {
                 command = command.substring(0, command.indexOf("-")+2);
             }
         }
-        //TODO: Error no entre en el else se queda pending
+        //TODO: controlar error por si se queda pending
         if (routes[command]) {
             try {
                 response = await routes[command](req, res); 
@@ -59,10 +58,10 @@ app.post('/execute', async (req, res) => {
             }
 
         }else {
-            //TODO: crear un get para imprimir por consola la lista de comandos
-            response = `Unknown command: ${command}`;
+            res.send({message:`Unknown command: ${command} <div>You should try: get -l<div>`});
         }
     }catch(error){
+        //TODO: crear un get para imprimir por consola la lista de comandos
         console.log("Error in execute: ", error);
     }
 });

@@ -19,20 +19,27 @@ $(document).ready(function(){
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify({command})
                     }).then((response) => {
-                        console.log(response);
-                        return response.json()
+                        return response.json();
                     }).then((result) => {
-                        var str = JSON.stringify(result);
-                        console.log(str);
-                        terminal.innerHTML += validationType(str);
+                        try{
+                            var str = "";
+                            if(typeof(result) == "object" && result.message){
+                                str = result.message;
+                            }else{
+                                str = JSON.stringify(result);
+                            }
+                            terminal.innerHTML += validationType(str);
+                        }catch(error){console.log("Surgió un error en el front", error)}
                     }).catch((error) =>{
-                        console.log("Front error ", error);
+                        console.log("Entra al final aqui", error);
+                        terminal.innerHTML += validationType(`Unknown command: ${command} <div>You should try: get -l<div>`);
                     });
                 } catch (error) {
                     console.log("Error:", error);
                 }
-
-                terminal.scrollTop = terminal.scrollHeight;
+                setTimeout(() => {
+                    terminal.scrollTop = terminal.scrollHeight;
+                }, 30);
             }
         } else if (event.key === 'ArrowUp') {
             if (historyIndex > 0) {
@@ -57,7 +64,6 @@ $(document).ready(function(){
             let str_array = "";
             let array = response.replace("[","").replace("]","");
             array = array.split(",");
-            console.log(array);
             for(let res in array){
                 str_array += `<div>${array[res]}</div>`;
             }
