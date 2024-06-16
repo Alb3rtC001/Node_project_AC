@@ -1,5 +1,5 @@
 {
-    "General":{
+    "Complete":{
         "name": "String",
         "description": "String",
         "deadline": "Date",
@@ -32,7 +32,8 @@
                 "notes": "String",
                 "status": "Bolean"
             }
-        ]
+        ],
+        "author": "Int"
     },
     "Study": {
         "name": "String",
@@ -83,5 +84,20 @@
     },
     "List":{
 
+    },
+    "General":{
+        "nombre": "String",
+        "description": "String",
+        "deadline": "String",
+        "startDate": "Date",
+        "lastUpdate": "Date",
+        "countUpdates" : "Int",
+        "status": "Bolean",
+        "progress": [{
+            "date": "Date",
+            "notes": "String",
+            "status": "Bolean"
+        }],
+        "author": "String"
     }
 }

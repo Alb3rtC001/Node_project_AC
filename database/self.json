@@ -1,9 +1,9 @@
 {
-    "1716588000": {
+    "2024": {
         "goals": {
             "0":{
                 "name": "Test",
-                "type": "General",
+                "type": "Complete",
                 "description": "New check test",
                 "deadline": "2025/01/01 00:00:00",
                 "schedule": {
@@ -38,7 +38,7 @@
                 ]
             }
         }, 
-        "totalGoalsCreated": 0,
+        "totalGoalsCreated": 1,
         "totalGoalsComplited": 0,
         "author": "0001"
     }

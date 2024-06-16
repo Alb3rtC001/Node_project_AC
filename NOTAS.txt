@@ -8,6 +8,8 @@ Mi carpeta Routes es mi controlador
 ---------------------
 
 * Puntos a conseguir:
+- Crear en el back una función en generalFn para añadir nuevos objetos a mongo // que puedas añadirlos en el front por campos necesarios (hacer lo global)
+# Puede ser mas sencillo, enviar al front que vamos añadir ciertos campos (enviar array con los campos) en el front crea el objeto que se envia al back y el back verifica y los añade
 - Promesa para rutas erroneas (Implementar middleware)
 - Crear un archivo para control de Errores
 - Añadir una función de print (hacer mas bonito los dato que se printan en el front / mejro estructurados)

@@ -9,7 +9,9 @@ router.get('/:action', async (req, res) => {
             res.json(global.ROUTES); //imprime todos los comandos || es el --help
             break;
         case 'cl':
-            res.send({message:"<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>"});
+            res.send({message:"<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>"+
+            "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>"+
+            "<br><br><br><br><br><br><br><br><br><br><br><br>"});
             console.clear() //Clear console node
             break;
         default:
