@@ -25,23 +25,4 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.get('/-help', async (req, res) => {
-    try {
-        //TODO: eliminar /cambiar
-        res.send([
-            '---------------------------------------',
-            'Las rutas conocidas son las siguientes:',
-            'goal -g -c',
-            'self -g -s',
-            'self -p -s',
-            'user -g',
-            'user -p',
-            'user -g --help',
-            '---------------------------------------'
-          ]);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
-
 module.exports = router;

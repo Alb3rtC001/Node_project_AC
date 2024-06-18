@@ -19,3 +19,16 @@ Mi carpeta Routes es mi controlador
 - Implementar mathplotlib para las graph de Python en el front
 *************
 - Mirar que funcione sin base de datos para el apartado sin conexión (Y volcar todas las llamadas e inputs una vez haya conex)
+
+
+
+
+
+-----------------------------------
+Como hacer el post (1.)
+1- En el front haces el comando ->post "module"<- (general, hacer un post de un objeto entero)
+2- El back envia un json con key value (siendo el value el tipo de dato que necesito recibir y la key el nombre del dato en concreto)
+3- El front tiene una función generica donde vas introduciendo los datos y creando un objeto según los parametros enviados que se pasará al back
+4- El back vuelve a verificar los datos y finalmente los introduce en base de datos
+
+Como hacer el post (2.)

@@ -1,9 +1,10 @@
 const express = require('express');
 const YearGoals = require('../models/Goal');
 const router = express.Router();
-/*
+
+//(TEST)
 // Ruta para obtener todas las metas de un año
-router.get('-c/:year', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const year = req.params.year;
         const yearGoals = await YearGoals.findById(year);
@@ -17,7 +18,7 @@ router.get('-c/:year', async (req, res) => {
 });
 
 // Ruta para agregar una nueva meta a un año específico
-router.post('-c/:year', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const year = req.params.year;
         const goalId = `goal${Date.now()}`; // Genera un ID único basado en la fecha actual
@@ -43,7 +44,7 @@ router.post('-c/:year', async (req, res) => {
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
-});*/
+});
 
 // Comando específico para objetivos
 router.get('/-c/:action', async (req, res) => {
@@ -55,6 +56,16 @@ router.get('/-c/:action', async (req, res) => {
             break;
         default:
             res.status(400).json({ message: 'Comando no reconocido' });
+    }
+});
+
+//Esto lo puedo substituir por el valor de summary
+router.get('/type -s', async (req, res) => {
+    try{
+        //TODO: Mostrar todos los tipos de goals
+        res.json({ message: 'Resumen de objetivos' });
+    }catch(error){
+        res.json({message: error.message})
     }
 });
 
