@@ -32,3 +32,4 @@ Como hacer el post (1.)
 4- El back vuelve a verificar los datos y finalmente los introduce en base de datos
 
 Como hacer el post (2.)
+Cambiar schemas por express validator

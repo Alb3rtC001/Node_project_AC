@@ -37,31 +37,36 @@ app.get('/home', function(req, res) {
 
 app.post('/execute', async (req, res) => { 
     try{
-        var command = req.body.command;
+        var command = command_value(req.body.command, req);
         let response;
-        
-        if(command.indexOf("-") != -1){ //Si contiene - entra
-            if(command.length - command.indexOf("-") <= 3){
-                req.params.action = command.substring(command.indexOf("-")+1, command.length);
-                command = command.substring(0, command.indexOf("-")+1);
-            }else{
-                req.params.action = command.substring(command.indexOf("-")+3, command.length);
-                command = command.substring(0, command.indexOf("-")+2);
-            }
-        }
-        //TODO: controlar error por si se queda pending
-        if (routes[command]) {
-            try {
-                response = await routes[command](req, res); 
-            } catch (error) {
-                response = `Error executing command: ${error.message}`;
-            }
 
-        }else {
-            res.send({message:`Unknown command: ${command} <div>You should try: get -l<div>`});
+        if (routes[command]) {
+            response = new Promise((resolve, reject) => {
+                routes[command](req, res)
+                    .then(result => resolve(result))
+                    .catch(error => reject(`Error executing command: ${error.message}`));
+            });
+        } else {
+            response = Promise.resolve({ message: `Unknown command: ${command}. <br>You should try: get -l` });
         }
+        
+        response.then(result => res.send(result))
+                .catch(error => res.status(500).send({ message: `Internal server error: ${error}` }));
+        
     }catch(error){
-        //TODO: crear un get para imprimir por consola la lista de comandos
         console.log("Error in execute: ", error);
     }
 });
+
+function command_value(command, req){
+    if(command.indexOf("-") != -1){ //Si contiene - entra
+        if(command.length - command.indexOf("-") <= 3){
+            req.params.action = command.substring(command.indexOf("-")+1, command.length);
+            return command.substring(0, command.indexOf("-")+1);
+        }else{
+            req.params.action = command.substring(command.indexOf("-")+3, command.length);
+            return command.substring(0, command.indexOf("-")+2);
+        }
+    }
+    return req.body.command;
+}   
