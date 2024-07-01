@@ -1,4 +1,3 @@
-dist/* linguist-vendored=false
 test/fixtures/* -text
 vcbuild.bat text eol=crlf
 deps/npm/bin/npm text eol=lf
