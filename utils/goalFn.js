@@ -1,3 +1,4 @@
+const { connectToMongo } = require('../config/mongodb');
 
 function getGoalJosn(){
     const newGoal = {
@@ -46,6 +47,10 @@ function getGoalJosn(){
 //TODO: mejorar crear en general un función de print
 function goalCommandList(){
     return ["year add_year", "all", "-l"]
+}
+
+function test(){
+    
 }
 
 
