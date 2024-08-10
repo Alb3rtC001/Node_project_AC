@@ -33,3 +33,6 @@ Como hacer el post (1.)
 
 Como hacer el post (2.)
 Cambiar schemas por express validator
+Cambios hechos para la conexión de base de datos falta implementar archivo
+Añadido los archivos de para las funciones de cada rutas
+*Estaría bien hacer una clase para cada "Tabla"
