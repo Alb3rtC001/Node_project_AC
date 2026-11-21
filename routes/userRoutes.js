@@ -14,10 +14,10 @@ router.get('/', async (req, res) => {
 
 // Ruta para agregar un nuevo documento en la colección "User"
 router.post('/', async (req, res) => {
-    const user = new Users({
-        name: req.body.name
-    });
     try {
+        const user = new Users({
+            name: req.body && req.body.name
+        });
         const newUser = await user.save();
         res.status(201).json(newUser);
     } catch (error) {

@@ -14,10 +14,11 @@ router.get('/', async (req, res) => {
 
 // Ruta para agregar un nuevo documento en la colección "self"
 router.post('/', async (req, res) => {
-    const goalsType = new GoalsType({
-        name: req.body.name
-    });
     try {
+        // TODO: el schema de GoalsType no tiene campo "name"; decidir qué debe recibir este POST
+        const goalsType = new GoalsType({
+            name: req.body && req.body.name
+        });
         const newGoalsType = await goalsType.save();
         res.status(201).json(newGoalsType);
     } catch (error) {
