@@ -2,20 +2,20 @@ const express = require('express');
 const connectToMongo = require('./config/mongodb');
 const loadRoutes = require('./managerRoutes');
 const logger = require('./config/wingston');
-const bodyParser = require('body-parser'); // Asegurarse de que este middleware está en uso
 const path = require('path');
 
 require('dotenv').config();
 
 const app = express();
-const routes = loadRoutes(app);
-process.env.ROUTES = routes;
 const PORT = process.env.PORT || 3000;
 const url = `${process.env.TERMINAL_URL}${PORT}/home`;
 
+// Los parsers tienen que registrarse ANTES que las rutas, si no req.body llega undefined
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+const routes = loadRoutes(app);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
@@ -35,27 +35,34 @@ app.get('/home', function(req, res) {
     res.sendFile(path.join(__dirname, 'public', 'view', 'main_view.html'));
 });
 
-app.post('/execute', async (req, res) => { 
-    try{
-        var command = command_value(req.body.command, req);
-        let response;
-
-        if (routes[command]) {
-            response = new Promise((resolve, reject) => {
-                routes[command](req, res)
-                    .then(result => resolve(result))
-                    .catch(error => reject(`Error executing command: ${error.message}`));
-            });
-        } else {
-            response = Promise.resolve({ message: `Unknown command: ${command}. <br>You should try: get -l` });
-        }
-        
-        response.then(result => res.send(result))
-                .catch(error => res.status(500).send({ message: `Internal server error: ${error}` }));
-        
-    }catch(error){
-        console.log("Error in execute: ", error);
+app.post('/execute', async (req, res) => {
+    const raw = req.body && req.body.command;
+    if (typeof raw !== 'string' || raw.trim() === '') {
+        return res.status(400).send({ message: 'Missing command. <br>You should try: get -l' });
     }
+
+    const command = command_value(raw.trim(), req);
+    const handler = routes[command];
+    if (!handler) {
+        return res.send({ message: `Unknown command: ${command}. <br>You should try: get -l` });
+    }
+
+    // Los handlers responden ellos mismos (res.json / res.send); aquí solo capturamos errores
+    try {
+        await handler(req, res);
+    } catch (error) {
+        console.error('Error in execute:', error);
+        if (!res.headersSent) {
+            res.status(500).send({ message: `Internal server error: ${error.message}` });
+        }
+    }
+});
+
+// Middleware global de errores (debe ir el último)
+app.use((err, req, res, next) => {
+    console.error(err);
+    if (res.headersSent) return next(err);
+    res.status(500).json({ message: err.message || 'Internal server error' });
 });
 
 function command_value(command, req){
@@ -68,5 +75,5 @@ function command_value(command, req){
             return command.substring(0, command.indexOf("-")+2);
         }
     }
-    return req.body.command;
+    return command;
 }   

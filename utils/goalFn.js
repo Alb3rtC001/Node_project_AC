@@ -1,10 +1,13 @@
 
-function getGoalJosn(){
-    const newGoal = {
+// Devuelve un goal nuevo cada vez (las fechas se calculan en el momento de la petición)
+function createDefaultGoal(){
+    const now = new Date();
+    const deadline = new Date(now.getFullYear() + 1, 0, 1); // 1 de enero del año siguiente
+    return {
         name: 'Nuevo objetivo',
         type: 'Complete',
         description: 'Descripción del nuevo objetivo',
-        deadline: new Date('2025-01-01'),
+        deadline,
         schedule: {
             horas: null,
             day: null,
@@ -15,32 +18,16 @@ function getGoalJosn(){
                 Nb: 0, Dc: 0
             }
         },
-        startDate: new Date(),
-        lastUpdate: new Date(),
+        startDate: now,
+        lastUpdate: now,
         countUpdates: 0,
         status: false,
         progress: [{
-            date: new Date(),
+            date: now,
             notes: 'Notas de progreso',
             status: false
         }]
     };
-    
-    fetch('/api/goals/2024', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newGoal)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Objetivo creado:', data);
-    })
-    .catch(error => {
-        console.error('Error al crear el objetivo:', error);
-    });
-    
 }
 
 //TODO: mejorar crear en general un función de print
@@ -50,7 +37,7 @@ function goalCommandList(){
 
 
 const goalFn = {
-    getGoalJosn,
+    createDefaultGoal,
     goalCommandList
 };
 

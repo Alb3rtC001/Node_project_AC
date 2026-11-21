@@ -19,7 +19,7 @@ const loadRoutes = (app) => {
                 var key = `${method} ${routeName}` + (layer.route.path.replace('/', '') != "" ? ` ${layer.route.path.replace('/', '').replace('/', '').split(":")[0]}` : ''); //Aqui compone el comando por tipo de metodo, nombre de la clase y acción si fuera necesario
                 key = key.charAt(key.length-1) == " "? key.slice(0, -1) : key; 
                 all_routes.push(key+additions);
-                layer.route.stack[0].params = layer.route.path.replace('/', '').replace('/', '').split(":")[1];1
+                layer.route.stack[0].params = layer.route.path.replace('/', '').replace('/', '').split(":")[1];
                 routes[key] = layer.route.stack[0].handle;
             }
         });
@@ -28,4 +28,4 @@ const loadRoutes = (app) => {
     return routes;
 };
 
-module.exports = loadRoutes;
+module.exports = loadRoutes;
